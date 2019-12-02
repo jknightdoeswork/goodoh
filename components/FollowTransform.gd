@@ -22,5 +22,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if follow_enabled:
 		target_location = grandparent.to_global(Vector3.ZERO) + offset
-	parent.translation = Utils.smooth_damp_vec3(parent.translation, target_location, velocity, follow_smooth_time, delta, INF)
-	velocity = Utils.smooth_damp_vec3_velocity
+	parent.translation = Smoothing.smooth_damp_vec3(parent.translation, target_location, velocity, follow_smooth_time, delta, INF)
+	velocity = Smoothing.smooth_damp_vec3_velocity
