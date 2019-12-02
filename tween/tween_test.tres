@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://doubleoh/tween/TweenData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+property = ""
+values = [ null, null ]
+duration = 1.0
+delay = 1.0
+transition = 0
+ease_type = 0
+initial_value_type = 0
