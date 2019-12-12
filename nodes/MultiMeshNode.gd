@@ -16,11 +16,12 @@ func _enter_tree() -> void:
 	#print ("Enter Tree")
 	if !is_transform_notification_enabled():
 		set_notify_transform(true)
-	BoxRenderer.register_child(self)
+	#BoxRenderer.register_child(self)
 
 func _exit_tree() -> void:
 	#print ("Exit Tree")
-	BoxRenderer.deregister_child(self)
+	#BoxRenderer.deregister_child(self)
+	pass
 
 func set_color(c:Color) -> void:
 	color = c
