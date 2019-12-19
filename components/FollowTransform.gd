@@ -4,6 +4,7 @@ class_name FollowTransform
 
 export var follow_smooth_time := 0.5
 export var offset := Vector3.ZERO
+export(NodePath) var follow_node
 
 var parent:Spatial = null
 var grandparent:Spatial = null
@@ -18,6 +19,8 @@ func _ready() -> void:
 	grandparent = parent.get_parent()
 	parent.set_as_toplevel(true)
 	target_location = parent.to_global(Vector3.ZERO)
+	if follow_node != null && get_node(follow_node) is Spatial:
+		grandparent = get_node(follow_node)
 	
 func _process(delta: float) -> void:
 	if follow_enabled:
