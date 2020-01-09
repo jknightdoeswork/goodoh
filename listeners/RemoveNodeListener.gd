@@ -3,4 +3,4 @@ extends Node
 class_name RemoveNodeListener
 
 func do():
-	queue_free()
+	get_parent().queue_free()
