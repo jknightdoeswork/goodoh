@@ -1,11 +1,13 @@
 extends Node
-
+# RepeatedInputAction
+# This script emits a signal both when an action is first pressed,
+# and then again at set intervals if the key is held down.
 signal action_triggered
 
 export(String) var action_name
 
+var trigger_times := [0.3, 0.2, 0.1, 0.1, 0.1, 0.05]
 var next_press_time := 0.0
-var trigger_times := [1.0, 0.5, 0.2, 0.1]
 var trigger_count := 0
 
 func _ready():
