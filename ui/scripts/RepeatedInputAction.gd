@@ -21,6 +21,8 @@ func _process(delta):
 			next_press_time -= delta
 			if next_press_time <= 0.0:
 				trigger_action()
+		else:
+			trigger_count = 0
 
 func trigger_action():
 	emit_signal("action_triggered")
