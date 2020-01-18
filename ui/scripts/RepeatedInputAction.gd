@@ -6,7 +6,7 @@ signal action_triggered
 
 export(String) var action_name
 
-var trigger_times := [0.3, 0.2, 0.1, 0.1, 0.1, 0.05]
+var trigger_times := [0.2, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.01]
 var next_press_time := 0.0
 var trigger_count := 0
 
