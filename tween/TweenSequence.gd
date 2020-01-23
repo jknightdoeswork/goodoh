@@ -1,5 +1,5 @@
 tool
-extends Spatial
+extends Node
 
 export(Array, Resource) var tween_list setget set_tween_list
 
