@@ -15,9 +15,9 @@ func do():
 	elif t.initial_value_type == TweenData.InitialValueType.PreviousFinal:
 		pass
 	tween.interpolate_property(target_node, t.property, i, t.final_value(), t.duration, t.transition, t.ease_type, t.delay)
-
+	tween.start()
+	
 func set_make_tween_data(b:bool):
-	print (b)
 	if b:
 		tween_data = TweenData.new()
 		property_list_changed_notify()
