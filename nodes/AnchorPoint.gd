@@ -14,4 +14,3 @@ func set_anchor_point(a:Vector3) -> void:
 	var child = get_child(0)
 	if child != null:
 		child.translation = -1.0 * anchor_point * anchor_point_scale
-		print ("setting translation")
