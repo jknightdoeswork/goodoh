@@ -40,8 +40,9 @@ func register_child(c:MultiMeshNode) -> void:
 	registered_children.append(c)
 	
 	#multimesh.set_instance_transform(c.instance_id, c.global_transform)
-	child_visibility_changed(c.instance_id, c)
-	multimesh.set_instance_color(c.instance_id, c.color)
+	child_transform_changed(c.instance_id, c)
+	child_color_changed(c.instance_id, c.color)
+	
 	var e = c.connect("color_changed", self, "child_color_changed")
 	assert(e == 0)
 	e = c.connect("transform_changed", self, "child_transform_changed")
