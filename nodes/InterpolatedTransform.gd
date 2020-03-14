@@ -36,7 +36,8 @@ func _physics_process(_delta: float) -> void:
 		
 func _process(_delta: float) -> void:
 	if interpolate_enabled:
-		var interpolation_factor = InterpolationMaster.interpolation_factor
+		#var interpolation_factor = InterpolationMaster.interpolation_factor
+		var interpolation_factor = Engine.get_physics_interpolation_fraction()
 		translation = lerp(last_physics_position, current_physics_position, interpolation_factor)
 		rotation = last_physics_rotation.slerp(current_physics_rotation, interpolation_factor).get_euler()
 		scale = lerp(last_physics_scale, current_physics_scale, interpolation_factor)
