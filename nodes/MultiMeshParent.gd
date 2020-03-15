@@ -23,7 +23,7 @@ func reset_indicies() -> void:
 		i += 1
 	
 	multimesh.visible_instance_count = registered_children.size()
-	
+
 func deregister_child(c:MultiMeshNode) -> void:
 	c.disconnect("color_changed", self, "child_color_changed")
 	c.disconnect("transform_changed", self, "child_transform_changed")
@@ -32,7 +32,7 @@ func deregister_child(c:MultiMeshNode) -> void:
 	# Todo...?
 	reset_indicies()
 	#needs_update = true
-	
+
 func register_child(c:MultiMeshNode) -> void:
 	#if self.is_inside_tree():
 	# Grab instance_id from multimesh count
@@ -52,7 +52,7 @@ func register_child(c:MultiMeshNode) -> void:
 	#print ("registered " + str(c.instance_id))
 	
 	multimesh.visible_instance_count = registered_children.size()
-	
+
 func set_child_transform_with_visibility(i:int, child:MultiMeshNode):
 	if i >= 0:
 		if child.is_visible_in_tree():
@@ -70,14 +70,14 @@ func child_color_changed(i:int, c:Color):
 func child_transform_changed(i:int, c:MultiMeshNode):
 	#print ("child transform changed")
 	set_child_transform_with_visibility(i, c)
-	
+
 func child_visibility_changed(i:int, child:MultiMeshNode):
 	#print ("child visbility changed " + str(child.is_visible_in_tree()))
 	set_child_transform_with_visibility(i, child)
-	
+
 func _process(_delta: float) -> void:
 	if needs_update:
 		#print ("resetting indicies")
 		self.reset_indicies()
 		needs_update = false
-	
+
