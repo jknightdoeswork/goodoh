@@ -8,7 +8,7 @@ export(bool) var default_value
 onready var saved_settings = Engine.get_singleton("SavedSettings")
 
 func _ready() -> void:
-	assert(saved_settings != null)
+	#assert(saved_settings != null)
 	
 	# Set initial option using setting_key
 	if saved_settings != null:
