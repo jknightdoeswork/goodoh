@@ -14,6 +14,7 @@ func end_sample(s:String):
 	
 
 func print_samples():
+	print("[Perf]")
 	for sample_name in sample_dict:
 		var sample_delta = sample_dict[sample_name]
 		print ("[Perf]\t%s\t\t%s" % [sample_name, sample_delta])
