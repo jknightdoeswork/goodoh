@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://goodoh/postprocessing/postprocessing_shader.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/background = Color( 0, 0, 0, 0 )
+shader_param/color_sens = 10.0
+shader_param/depth_sens = 30.0
+shader_param/lower_threshold = 0.05
+shader_param/upper_threshold = 3.0
+shader_param/dist_falloff = 40.0
+shader_param/threshold = 0.1
