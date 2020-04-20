@@ -1,5 +1,6 @@
 shader_type spatial;
-render_mode unshaded, depth_test_disable, cull_disabled, shadows_disabled;
+render_mode unshaded, cull_back, shadows_disabled, depth_draw_opaque;
+
 uniform vec4 color : hint_color;
 uniform vec4 background : hint_color;
 uniform float color_sens;
@@ -14,12 +15,25 @@ uniform float dist_falloff = 40.0;
 
 uniform float threshold;
 
-float LinearEyeDepth(float z) {
-	return z;
+
+
+float Linear01Depth(float z, vec2 screen_uv, mat4 inv_proj_mat) {
+	/// PERSP
+	vec3 ndc = vec3(screen_uv, z) * 2.0 - 1.0;
+	vec4 view = inv_proj_mat * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+  	return -view.z;
+	/// ORTHO
+	//return z * dist_falloff;
+	//return z;
 }
 
-float Linear01Depth(float z) {
-	return z;
+float LinearEyeDepth(float z,  vec2 screen_uv, mat4 inv_proj_mat) {
+	/// PERSP
+	return Linear01Depth(z, screen_uv, inv_proj_mat);
+	/// ORTHO
+	//return z;
+	//return z * dist_falloff* dist_falloff;
 }
 
 void vertex() {
@@ -63,20 +77,20 @@ void fragment() {
 	
     // Calculate fall-off parameter from the depth of the nearest point
     float zm = min(min(min(zs0, zs1), zs2), zs3);
-    float falloff = 1.0 - clamp((LinearEyeDepth(zm) * inverse_fall_off), 0.0, 1.0);
+    float falloff = 1.0 - clamp((LinearEyeDepth(zm, SCREEN_UV, INV_PROJECTION_MATRIX) * inverse_fall_off), 0.0, 1.0);
 
     // Convert to linear depth values.
-    float z0 = Linear01Depth(zs0);
-    float z1 = Linear01Depth(zs1);
-    float z2 = Linear01Depth(zs2);
-    float z3 = Linear01Depth(zs3);
+    float z0 = Linear01Depth(zs0, SCREEN_UV, INV_PROJECTION_MATRIX);
+    float z1 = Linear01Depth(zs1, SCREEN_UV, INV_PROJECTION_MATRIX);
+    float z2 = Linear01Depth(zs2, SCREEN_UV, INV_PROJECTION_MATRIX);
+    float z3 = Linear01Depth(zs3, SCREEN_UV, INV_PROJECTION_MATRIX);
 
     // Roberts cross operator
     float zg1 = z1 - z0;
     float zg2 = z3 - z2;
     float zg = sqrt(zg1 * zg1 + zg2 * zg2);
 
-    edge = max(edge, zg * falloff * depth_sens / Linear01Depth(zm));
+    edge = max(edge, zg * falloff * depth_sens / Linear01Depth(zm, SCREEN_UV, INV_PROJECTION_MATRIX));
 	// End Depth
 	
 	// Thresholding
@@ -86,6 +100,19 @@ void fragment() {
 	
 	vec3 cb = mix(c0.rgb, background.rgb, background.a);
 	vec3 co = mix(cb, color.rgb, edge * color.a);
-	ALBEDO = co;
+	
+
+	//ALBEDO = co;
+	float d = texture(DEPTH_TEXTURE, uv0).r;
+	//d = LinearEyeDepth(d);
+	d = Linear01Depth(d, SCREEN_UV, INV_PROJECTION_MATRIX);
+	
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).x;
+	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+  	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+  	view.xyz /= view.w;
+  	float linear_depth = -view.z;
+	d = linear_depth/dist_falloff;
+	ALBEDO = vec3(d,d,d);
 }
 
