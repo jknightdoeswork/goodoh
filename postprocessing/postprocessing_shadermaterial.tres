@@ -5,10 +5,11 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/color = Color( 0, 0, 0, 1 )
-shader_param/background = Color( 0, 0, 0, 0 )
-shader_param/color_sens = 0.0
-shader_param/depth_sens = 100.0
+shader_param/background = Color( 1, 1, 1, 0 )
+shader_param/color_sens = 1.0
+shader_param/depth_sens = 0.0
 shader_param/lower_threshold = 0.05
 shader_param/upper_threshold = 0.5
-shader_param/dist_falloff = 5000.0
-shader_param/threshold = 0.5
+shader_param/dist_falloff = 250.0
+shader_param/pixel_scale = 1.0
+shader_param/threshold = 0.0

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_back, shadows_disabled, depth_draw_opaque;
+render_mode unshaded, cull_back, shadows_disabled, depth_test_disable;
 
 uniform vec4 color : hint_color;
 uniform vec4 background : hint_color;
@@ -9,6 +9,7 @@ uniform float depth_sens;
 uniform float lower_threshold = 0.05;
 uniform float upper_threshold = 0.5;
 uniform float dist_falloff = 40.0;
+uniform float pixel_scale = 0.5;
 
 //uniform float inverse_fall_off;
 //uniform float inverse_range;
@@ -18,19 +19,16 @@ uniform float threshold;
 
 
 float Linear01Depth(float z, vec2 screen_uv, mat4 inv_proj_mat) {
-	/// PERSP
 	vec3 ndc = vec3(screen_uv, z) * 2.0 - 1.0;
 	vec4 view = inv_proj_mat * vec4(ndc, 1.0);
 	view.xyz /= view.w;
-  	return -view.z;
-	/// ORTHO
-	//return z * dist_falloff;
-	//return z;
+	float linear_depth = -view.z / dist_falloff;
+	return linear_depth;
 }
 
 float LinearEyeDepth(float z,  vec2 screen_uv, mat4 inv_proj_mat) {
 	/// PERSP
-	return Linear01Depth(z, screen_uv, inv_proj_mat);
+	return Linear01Depth(z, screen_uv, inv_proj_mat) * dist_falloff;
 	/// ORTHO
 	//return z;
 	//return z * dist_falloff* dist_falloff;
@@ -46,7 +44,7 @@ void fragment() {
 	
 	vec4 c0 = texture(SCREEN_TEXTURE, SCREEN_UV).rgba;
 	
-	vec2 texel_size = 1.0 / VIEWPORT_SIZE;
+	vec2 texel_size = pixel_scale / VIEWPORT_SIZE;
 	// Four sample points of the roberts cross operator
 	vec2 uv0 = SCREEN_UV;                            // TL
 	vec2 uv1 = SCREEN_UV + texel_size.xy;           // BR
@@ -102,17 +100,6 @@ void fragment() {
 	vec3 co = mix(cb, color.rgb, edge * color.a);
 	
 
-	//ALBEDO = co;
-	float d = texture(DEPTH_TEXTURE, uv0).r;
-	//d = LinearEyeDepth(d);
-	d = Linear01Depth(d, SCREEN_UV, INV_PROJECTION_MATRIX);
-	
-	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).x;
-	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
-  	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
-  	view.xyz /= view.w;
-  	float linear_depth = -view.z;
-	d = linear_depth/dist_falloff;
-	ALBEDO = vec3(d,d,d);
+	ALBEDO = co;
 }
 
