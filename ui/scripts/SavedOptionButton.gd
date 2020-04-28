@@ -4,9 +4,10 @@ class_name SavedOptionButton
 
 export(String) var setting_key
 
-onready var saved_settings = Engine.get_singleton("SavedSettings")
+onready var saved_settings = get_node("/root/SavedSettings")
 
 func _ready() -> void:
+	assert(saved_settings != null)
 	# print ("[SavedOptionButton] ready")
 	# Set initial option using setting_key
 	var initial_value = saved_settings.set_default_value(setting_key, default_value)

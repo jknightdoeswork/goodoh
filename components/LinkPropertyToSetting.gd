@@ -3,7 +3,7 @@ class_name LinkPropertyToSetting
 export(String) var setting_name
 export(String) var property_name
 
-onready var saved_settings = Engine.get_singleton("SavedSettings")
+onready var saved_settings = get_node("/root/PlayerVariables")
 
 func _ready():
 	assert(saved_settings != null)

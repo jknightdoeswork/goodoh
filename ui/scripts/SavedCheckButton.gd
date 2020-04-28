@@ -5,10 +5,10 @@ class_name SavedCheckButton
 export(String) var setting_key
 export(bool) var default_value
 
-onready var saved_settings = Engine.get_singleton("SavedSettings")
+onready var saved_settings = get_node("/root/SavedSettings")
 
 func _ready() -> void:
-	#assert(saved_settings != null)
+	assert(saved_settings != null)
 	
 	# Set initial option using setting_key
 	if saved_settings != null:

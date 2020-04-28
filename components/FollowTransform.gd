@@ -12,7 +12,7 @@ var velocity := Vector3.ZERO
 var target_location := Vector3.ZERO
 var follow_enabled := true
 
-onready var smoothing = Engine.get_singleton("Smoothing")
+onready var smoothing = get_node("/root/Smoothing")
 
 func _ready() -> void:
 	assert(smoothing != null)
