@@ -43,8 +43,8 @@ void fragment() {
 	float inverse_fall_off = 1.0 / dist_falloff;
 	
 	vec4 c0 = texture(SCREEN_TEXTURE, SCREEN_UV).rgba;
-	
-	vec2 texel_size = pixel_scale / VIEWPORT_SIZE;
+	ivec2 tex_size = textureSize(SCREEN_TEXTURE, 0);
+	vec2 texel_size = vec2(pixel_scale / float(tex_size.x), pixel_scale / float(tex_size.y));
 	// Four sample points of the roberts cross operator
 	vec2 uv0 = SCREEN_UV;                            // TL
 	vec2 uv1 = SCREEN_UV + texel_size.xy;           // BR
@@ -101,5 +101,7 @@ void fragment() {
 	
 
 	ALBEDO = co;
+	
+	//ALBEDO = mix(c0.rgb, vec3(z0,z0,z0), 0.9);
 }
 
