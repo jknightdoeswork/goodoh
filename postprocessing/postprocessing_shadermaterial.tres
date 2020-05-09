@@ -6,15 +6,6 @@
 shader = ExtResource( 1 )
 shader_param/color = Color( 0, 0, 0, 1 )
 shader_param/background = Color( 1, 1, 1, 0 )
-<<<<<<< Updated upstream
-shader_param/color_sens = 8.0
-shader_param/depth_sens = 30.0
-shader_param/lower_threshold = 0.05
-shader_param/upper_threshold = 0.5
-shader_param/dist_falloff = 400.0
-shader_param/pixel_scale = 1.0
-shader_param/threshold = 0.1
-=======
 shader_param/color_sens = 10.0
 shader_param/depth_sens = 1.0
 shader_param/lower_threshold = 0.05
@@ -22,4 +13,3 @@ shader_param/upper_threshold = 1.0
 shader_param/dist_falloff = 500.0
 shader_param/pixel_scale = 1.0
 shader_param/threshold = 1.0
->>>>>>> Stashed changes
