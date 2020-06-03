@@ -2,9 +2,9 @@ extends TextureButton
 
 class_name TextureButtonHover
 
-export var normal_color := Color.white
-export var hover_color := Color.lightgray
-export var pressed_color := Color.white
+export var normal_color := Color.transparent
+export var hover_color := Color(1.0, 1.0, 1.0, 32.0/255.0)
+export var pressed_color := Color(1.0, 1.0, 1.0, 64.0/255.0)
 export var use_self_modulate := true
 
 var is_hovered := false
