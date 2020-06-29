@@ -11,7 +11,7 @@ func _ready():
 	saved_settings.connect("on_value_changed", self, "on_setting_value_changed")
 	if saved_settings.has_value(setting_name):
 		var setting_value = saved_settings.get_value(setting_name)
-		print ("[LinkPropertyToSetting] set(%s, %s)" % [property_name, setting_value])
+		#print ("[LinkPropertyToSetting] set(%s, %s)" % [property_name, setting_value])
 		self.get_parent().set(property_name, setting_value)
 	else:
 		print ("[LinkPropertyToSetting] key %s is unset!" % [setting_name])
