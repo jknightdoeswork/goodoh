@@ -1,5 +1,5 @@
 extends Node
-
+class_name SetVisibilityOnPress
 
 export(NodePath) var target
 export var set_visible_to := true
