@@ -1,5 +1,6 @@
 tool
 extends Node
+class_name TweenStartListener
 
 onready var target_node = get_parent()
 onready var tween = get_parent().get_node("Tween")
