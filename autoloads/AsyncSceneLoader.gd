@@ -26,10 +26,10 @@ func thread_update(_u):
 			
 			verbose_print("[AsyncSceneLoader] loading " + scene_path)
 			var scene := ResourceLoader.load(scene_path) as PackedScene
-			var level := scene.instance()
+			#var level := scene.instance()
 			
 			mutex.lock()
-			loaded_levels[scene_path] = level
+			loaded_levels[scene_path] = scene
 			mutex.unlock()
 			
 			call_deferred("send_signal", scene_path)
@@ -48,8 +48,8 @@ func enqueue_scene_load(path:String):
 	# Make sure callers have a frame to connect to signal
 	call_deferred("awaken_semaphore")
 
-func get_cached_scene(path:String)->Node:
-	var to_return:Node = null
+func get_cached_scene(path:String)->PackedScene:
+	var to_return:PackedScene = null
 	mutex.lock()
 	if loaded_levels.has(path):
 		to_return = loaded_levels[path]
