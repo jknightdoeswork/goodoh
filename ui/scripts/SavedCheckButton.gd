@@ -15,7 +15,7 @@ func _ready() -> void:
 		var initial_value = saved_settings.set_default_value(setting_key, default_value)
 		if setting_key and setting_key.length() > 0:
 			# Parse initial value from settings
-			initial_value 	= saved_settings.get_value(setting_key, default_value)
+			initial_value = saved_settings.get_value(setting_key, default_value)
 			
 			# Connect signal
 			var error = connect("toggled", self, "on_toggle")
@@ -24,7 +24,7 @@ func _ready() -> void:
 			print ("[SavedCheckButton] " + name  + " has no setting key.")
 
 		# Apply initial value
-		pressed	= initial_value
+		pressed = initial_value
 		
 func on_toggle(item_index):
 	# Store value on option changed
