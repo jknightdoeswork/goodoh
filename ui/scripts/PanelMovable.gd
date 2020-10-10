@@ -11,9 +11,10 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if event.pressed:
-				is_moving = true
-				mouse_down_position = event.position
-				movement_start_position = rect_position
+				if get_rect().has_point(event.position):
+					is_moving = true
+					mouse_down_position = event.position
+					movement_start_position = rect_position
 			else:
 				is_moving = false
 	if event is InputEventMouseMotion:
