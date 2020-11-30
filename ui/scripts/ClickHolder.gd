@@ -10,6 +10,7 @@ var mouse_is_hovering := false
 func _ready():
 	connect("mouse_entered", self, "on_mouse_entered")
 	connect("mouse_exited", self, "on_mouse_exited")
+	
 
 func on_mouse_entered():
 	mouse_is_hovering = true
@@ -17,7 +18,7 @@ func on_mouse_entered():
 func on_mouse_exited():
 	mouse_is_hovering = false
 
-func _input(event):
+func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			mouse_left = event.pressed

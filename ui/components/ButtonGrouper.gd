@@ -19,5 +19,4 @@ func _ready():
 
 func button_pressed():
 	selected = buttons.find(button_group.get_pressed_button())
-	print("selected_button: " + str(selected))
 	self.emit_signal("changed")
