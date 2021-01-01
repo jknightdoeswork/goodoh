@@ -1,9 +1,8 @@
 extends Node
 
 # These must match in size
-export(Array, NodePath) var tabs:Array
-export(Array, NodePath) var panels:Array
-
+export(Array, NodePath) var tabs:Array # Must be to a Button
+export(Array, NodePath) var panels:Array # Must be to a Control
 
 func _ready():
 	var tab_index := 0
